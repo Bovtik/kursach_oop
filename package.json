@@ -1,0 +1,24 @@
+{
+  "name": "kursach_oop",
+  "version": "0.0.0",
+  "description": "Kursovoi project 2016",
+  "main": "app/server/server.js",
+  "dependencies": {
+    "express": "~4.13.4",
+    "socket.io": "~1.4.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./app/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bovtik/kursach_oop.git"
+  },
+  "author": "Bovtik",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Bovtik/kursach_oop/issues"
+  }
+}
