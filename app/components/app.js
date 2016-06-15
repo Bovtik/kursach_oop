@@ -111,9 +111,8 @@ App.sampleEgdes[0] = [
 	}
 ];
 
-App.constructGraph = function (path, fileName, nodeAmount, checkpointAmount) {
+App.constructGraph = function (path, fileName, nodeAmount) {
 	var nodeAmount = nodeAmount || 16,
-			checkpointAmount = checkpointAmount || 5,
 			fileName = fileName || 'graph',
 			path = path || './';
 			fileName += '.json';
@@ -135,12 +134,23 @@ App.constructGraph = function (path, fileName, nodeAmount, checkpointAmount) {
 		graph.nodes.push(node);
 	}
 
-	graph.edges = this.sampleEgdes[0];
+	this.sampleEgdes[0].forEach(function (item, i, arr) {
+		var edge = item;
+		edge.from = Math.floor( Math.random() * 40 ) + 10;
+		edge.to = Math.floor( Math.random() * 40 ) + 10;
+		graph.edges.push(edge);
+	});
 	if (typeof fs !== 'undefined' && fs !== null)
 		fs.writeFileSync(path + fileName, JSON.stringify(graph), 'utf8');
 
 	return fileName;
 };
+
+App.loadGraph = function (path) {
+	var stringData = fs.readFileSync(path);
+	var graph = JSON.parse(stringData);
+	return graph;
+}
 
 module.exports = App;
 

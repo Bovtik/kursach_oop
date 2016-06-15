@@ -5,9 +5,11 @@ var http = require('http'),
 var express = require('express');
 var server = express();
 var ws = require('socket.io')(1338);
-var app = require('../components/app.js');
 
-app.constructGraph('app/components/', 'graph');
+var App = require('../components/app.js'),
+		ShortWay = require('../components/shortway.js');
+
+App.constructGraph('app/components/', 'graph');
 
 server.use('/browser', 
   express.static(
@@ -19,7 +21,7 @@ server.use('/components',
     path.join(
       path.join(__dirname, '..'), 'components')));
 
-server.get('/', function(req, res) {
+server.get('/', function (req, res) {
   var layout = fs.readFileSync('app/browser/index.html', 'utf8');
   res.send(layout);
 });
@@ -31,7 +33,7 @@ server.listen(1337, function () {
 ws.on ('connection', function (socket) {
 	console.log('welcome');	
 
-	socket.on ('disconnect', function (socket) {
+	socket.on ('disconnect', function () {
 		console.log('goodbye');
 	});
 });
