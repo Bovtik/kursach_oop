@@ -3,15 +3,54 @@ body, html {
 	padding: 0;
 	height: 100%;
 	overflow: hidden;
+	background: #fff;
+	font-family: arial, sans-serif;
 }
 
 .workspace {
 	font-size: 2em;
-	font-family: arial, sans-serif;
 	height: 100%;
 }
 
 #canvas {
+	float: left;
 	height: 100%;
-	width: 100%;
+	width: 70%;
+	margin: 0;
+	padding: 0;
+	background: #fbfbfb;
+	border-left: solid 1px #732;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.menu {
+	float: left;
+	width: 30%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+}
+
+.text-input {
+	background: #fdfdfd;
+	padding: 15px;
+	margin: 20px;
+	border: solid 1px #ccc;
+	line-height: normal;
+	font: 18px Arial;
+	color: #5a5a5a;
+}
+
+button {
+	padding: 14px;
+	background: #ff6c5f;
+	border: solid 1px #732;
+	line-height: normal;
+	font: 18px Arial;
+	color: #000;
+	outline: none;
+	cursor: pointer;
 }

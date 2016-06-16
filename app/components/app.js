@@ -138,6 +138,7 @@ App.constructGraph = function (path, fileName, nodeAmount) {
 		var edge = item;
 		edge.from = Math.floor( Math.random() * 40 ) + 10;
 		edge.to = Math.floor( Math.random() * 40 ) + 10;
+		edge.label = edge.to + ' / ' + edge.from;
 		graph.edges.push(edge);
 	});
 	if (typeof fs !== 'undefined' && fs !== null)

@@ -9,7 +9,7 @@ var ws = require('socket.io')(1338);
 var App = require('../components/app.js'),
 		ShortWay = require('../components/shortway.js');
 
-App.constructGraph('app/components/', 'graph');
+//App.constructGraph('app/components/', 'graph');
 
 server.use('/browser', 
   express.static(
@@ -32,6 +32,14 @@ server.listen(1337, function () {
 
 ws.on ('connection', function (socket) {
 	console.log('welcome');	
+
+	var graph = App.loadGraph('app/components/graph.json');
+	
+	socket.emit('init', graph);
+
+	socket.on('generate', function(amount) {
+		console.log(amount);
+	});
 
 	socket.on ('disconnect', function () {
 		console.log('goodbye');
