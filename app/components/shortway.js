@@ -43,7 +43,6 @@ ShortWay.floyd = function(graph) {
 			matrix.h[i][j] = j;
 		}
 	}
-
 	for (var k = 0; k < graph.nodes.length; k++)
 		for (var i = 0; i < graph.nodes.length; i++)
 			for (var j = 0; j < graph.nodes.length; j++)
@@ -54,5 +53,65 @@ ShortWay.floyd = function(graph) {
 
 	return matrix;
 };
+
+ShortWay.findShortWay = function (graph, cpArr) {
+	cpArr.forEach(function(item, i, arr) {
+		graph.nodes[item].color = '#4444ff';
+	});
+
+	var floydM = this.floyd(graph);
+	console.log(floydM.h);
+	var data = {
+		graph: graph,
+		cpArr: cpArr,
+		way: [],
+		waylength: 0
+	};
+
+	
+	cpArr.forEach(function(item, i, arr) {
+
+		if (i + 1 >= cpArr.length) {
+			return;
+		}
+
+		
+		var next = arr[i + 1],
+				tempWay = [];
+		var tmp = floydM.h[next][item];
+
+		//data.way.push(item);
+		//data.way.push(floydM.h[0][item]);
+		data.waylength += floydM.w[0][item];
+
+		console.log(item + ' -> ' + next);
+
+		while (true) {
+			console.log('tmp = ' + tmp);
+			tempWay.push(tmp);
+			if (tmp == floydM.h[tmp][item]) {
+				console.log('hit >> ' + tmp);
+				tempWay.push(tmp);
+				break;
+			}
+			tmp = floydM.h[tmp][item];			
+		}
+
+		tempWay.reverse();
+		console.log(tempWay);
+		tempWay.forEach(function (item) {data.way.push(item)});
+		
+		data.way.push(arr[i + 1]);
+		for (var j = 0; j < data.way.length; j++) {
+			if (data.way[j] == data.way[j + 1]) {
+				delete data.way[j];
+				data.way.splice(j, 1);
+				--j;
+			}
+		}
+
+	});
+	return data;
+}
 
 module.exports = ShortWay;

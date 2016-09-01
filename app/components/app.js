@@ -147,6 +147,24 @@ App.constructGraph = function (path, fileName, nodeAmount) {
 	return fileName;
 };
 
+App.generateControlPoints = function (amount, max) {
+	var cpArr = [];
+	for (var i = 0; i < amount; i++) {
+		var tmpNum = Math.floor(Math.random() * max);
+		for (var i = 0; i < cpArr.length; i++) {
+			if (tmpNum === cpArr[i]) {
+				tmpNum = Math.floor(Math.random() * max);
+				--i;
+			}
+		}
+		cpArr.push(tmpNum);
+	}
+	
+	cpArr = [9, 0, 1, 3, 7];
+
+	return cpArr;
+};
+
 App.loadGraph = function (path) {
 	var stringData = fs.readFileSync(path);
 	var graph = JSON.parse(stringData);

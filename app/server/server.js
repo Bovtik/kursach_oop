@@ -3,34 +3,36 @@ var http = require('http'),
  		path = require('path');
 
 var express = require('express');
-var server = express();
-var ws = require('socket.io')(1338);
+var app = express();
+
 
 var App = require('../components/app.js'),
 		ShortWay = require('../components/shortway.js');
 
 //App.constructGraph('app/components/', 'graph');
 
-server.use('/browser', 
+app.use('/browser', 
   express.static(
     path.join(
       path.join(__dirname, '..'), 'browser')));
 
-server.use('/components', 
+app.use('/components', 
   express.static(
     path.join(
       path.join(__dirname, '..'), 'components')));
 
-server.get('/', function (req, res) {
+app.get('/', function (req, res) {
   var layout = fs.readFileSync('app/browser/index.html', 'utf8');
   res.send(layout);
 });
 
-server.listen(1337, function () {
+var server = app.listen(1337, function () {
   console.log('Listening on port 1337');
 });
 
-ws.on ('connection', function (socket) {
+var io = require('socket.io').listen(server);
+
+io.on ('connection', function (socket) {
 	console.log('welcome');	
 
 	var graph = App.loadGraph('app/components/graph.json');
@@ -38,7 +40,11 @@ ws.on ('connection', function (socket) {
 	socket.emit('init', graph);
 
 	socket.on('generate', function(amount) {
-		console.log(amount);
+		var cpArr = App.generateControlPoints(amount, graph.nodes.length);
+		console.log(cpArr);
+		if (result) delete result
+		var result = ShortWay.findShortWay(graph, cpArr);
+		socket.emit('result', result);
 	});
 
 	socket.on ('disconnect', function () {
