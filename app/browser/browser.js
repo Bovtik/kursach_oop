@@ -21,6 +21,18 @@ socket.on('init', function(graph) {
 socket.on('result', function(result) {
 	s.graph = result.graph;
 
+	for(var key in s.graph.nodes()) {
+		s.graph.nodes()[key].color = '#ec5148';
+	}
+
+	for (var i = 0; i < result.cpArr.length; i++) {
+		s.graph.nodes().forEach(function (item) {
+
+			if (item.label == result.cpArr[i])
+				item.color = "#33aa33"
+		});
+	}
+
 	for(var key in s.graph.edges()) {
 		s.graph.edges()[key].color = '#ec5148';
 	}
