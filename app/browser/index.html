@@ -12,8 +12,31 @@
 <body>
 	<div class="workspace">
 		<div class="menu">
-			<input type="text" class="text-input" id="amount">
-			<button id="genBtn">Generate</button>
+			<div class="input-field">
+				<div class="field-title">Direct selection of control nodes</div>
+				<div class="field-label">Enter node numbers separating with commas</div>
+				<input type="text" class="text-input" id="directSel" placeholder="1, 2, 3, ...">
+				<button id="dirBtn">Submit</button>
+			</div>
+
+			<div class="input-field">
+				<div class="field-title">Random generation of control nodes</div>
+				<div class="field-label">Enter amount of nodes to be generated</div>
+				<input type="text" class="text-input" id="genAmount">
+				<button id="genBtn">Generate</button>
+			</div>
+			<div class="info-wrapper">
+				<div class="nodelist-wrapper">
+					<div class="nodelist-title">Control nodes:</div>
+					<div class="nodelist">-</div>
+				</div>
+				<br>
+				<div class="way-wrapper">
+					<div class="way-title">Shortest way:</div>
+					<div class="way">-</div>
+				</div>
+				<button id="launchBtn">Launch</button>
+			</div>
 		</div>
 		<div id="canvas"></div>
 	</div>

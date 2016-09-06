@@ -160,7 +160,8 @@ App.generateControlPoints = function (amount, max) {
 		cpArr.push(tmpNum);
 	}
 	
-	cpArr = [9, 0, 1, 3, 7];
+	//cpArr = [9, 0, 1, 3, 7];
+	//	3, 1, 8, 0, 6
 
 	return cpArr;
 };

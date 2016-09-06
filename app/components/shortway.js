@@ -7,11 +7,11 @@ ShortWay.findEdge = function(graph, from, to) {
 	var edge = false;
 
 	graph.edges.forEach( function(item, i, arr) {
-		if (item.source == from && item.target == to)				
-			edge = item;
+		if (item.source == to && item.target == from)				
+			edge = Object.create(item);
 
-		if (item.source == to && item.target == from) {
-			edge = item;
+		if (item.source == from && item.target == to) {
+			edge = Object.create(item);
 			var tmp = edge;
 			edge.source = tmp.target;
 			edge.target = tmp.source;
@@ -26,7 +26,7 @@ ShortWay.findEdge = function(graph, from, to) {
 ShortWay.wayLength = function (egdes) {
 	var length = 0;
 
-	edges.forEach( function (item, i, arr) {
+	edges.forEach(function (item, i, arr) {
 		length += item.to;
 	});
 
@@ -58,30 +58,23 @@ ShortWay.findShortWay = function (graph, cpArr) {
 	cpArr.forEach(function(item, i, arr) {
 		graph.nodes[item].color = '#4444ff';
 	});
-
 	var floydM = this.floyd(graph);
-	console.log(floydM.h);
 	var data = {
 		graph: graph,
 		cpArr: cpArr,
 		way: [],
 		waylength: 0
 	};
-
 	
 	cpArr.forEach(function(item, i, arr) {
-
 		if (i + 1 >= cpArr.length) {
 			return;
 		}
 
-		
 		var next = arr[i + 1],
 				tempWay = [];
 		var tmp = floydM.h[next][item];
 
-		//data.way.push(item);
-		//data.way.push(floydM.h[0][item]);
 		data.waylength += floydM.w[0][item];
 
 		console.log(item + ' -> ' + next);
@@ -111,7 +104,20 @@ ShortWay.findShortWay = function (graph, cpArr) {
 		}
 
 	});
+
 	return data;
+}
+
+ShortWay.optimize = function (way) {
+	for (var i = way.length - 1; i >= 0; i--) {
+		way.forEach(function(item, j) {
+			if (item === way[i] && i !== j) {
+				delete way[i];
+				way.splice(i, 1);
+				return;
+			}
+		})
+	}
 }
 
 module.exports = ShortWay;

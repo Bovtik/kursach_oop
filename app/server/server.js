@@ -9,6 +9,8 @@ var app = express();
 var App = require('../components/app.js'),
 		ShortWay = require('../components/shortway.js');
 
+var store = {};
+
 //App.constructGraph('app/components/', 'graph');
 
 app.use('/browser', 
@@ -33,19 +35,29 @@ var server = app.listen(1337, function () {
 var io = require('socket.io').listen(server);
 
 io.on ('connection', function (socket) {
-	console.log('welcome');	
-
 	var graph = App.loadGraph('app/components/graph.json');
 	
 	socket.emit('init', graph);
 
 	socket.on('generate', function(amount) {
 		var cpArr = App.generateControlPoints(amount, graph.nodes.length);
-		console.log(cpArr);
-		if (result) delete result
-		var result = ShortWay.findShortWay(graph, cpArr);
-		socket.emit('result', result);
+		store.cpArr = cpArr;
+		console.log('Control nodes: ', store.cpArr);
+		socket.emit('cpArr', cpArr);	
 	});
+
+	socket.on('direct select', function (cpArr) {
+		store.cpArr = cpArr;
+		console.log('Control nodes: ', store.cpArr);
+		socket.emit('cpArr', cpArr);	
+	});
+
+	socket.on('launch', function () {
+		//console.log(graph);
+		var result = ShortWay.findShortWay(graph, store.cpArr);
+		ShortWay.optimize(result.way);
+		socket.emit('result', result);
+	})
 
 	socket.on ('disconnect', function () {
 		console.log('goodbye');
