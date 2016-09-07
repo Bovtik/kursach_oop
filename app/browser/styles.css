@@ -10,7 +10,6 @@ body, html {
 .workspace {
 	height: 100%;
 }
-
 #canvas {
 	float: left;
 	height: 100%;
@@ -23,7 +22,6 @@ body, html {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
 .menu {
 	float: left;
 	width: 30%;
@@ -38,11 +36,9 @@ body, html {
 	padding: 20px;
 	box-shadow: 0 5px 10px 0 #ccc;
 }
-
 .field-title {
 	font: 30px/54px arial, sans-serif;
 }
-
 .field-label {
 	font: 24px/36px arial, sans-serif;
 	color: #5f5f5f;
@@ -59,7 +55,6 @@ body, html {
 	font: 18px Arial;
 	color: #5a5a5a;
 }
-
 button {
 	height: 54px;
 	width: 120px;
@@ -73,7 +68,6 @@ button {
 	cursor: pointer;
 	color: #000;
 }
-
 button:hover {
 	background: #ff9c8f;
 	box-shadow: 2px 2px 5px 0 #ccc;
@@ -83,16 +77,18 @@ button:hover {
 	vertical-align: top;
 	padding: 20px;
 }
-
 .nodelist-wrapper {
 	display: inline-block;
 }
-
 .nodelist-title, .way-title {
 	font: 22px/28px arial, sans-serif;
 }
 .nodelist, .way {
 	height: 24px;
+}
+.waylength {
+	font: 14px/18px arial, sans-serif;
+	color: #777;
 }
 
 #launchBtn {

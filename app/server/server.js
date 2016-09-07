@@ -53,14 +53,13 @@ io.on ('connection', function (socket) {
 	});
 
 	socket.on('launch', function () {
-		//console.log(graph);
 		var result = ShortWay.findShortWay(graph, store.cpArr);
 		ShortWay.optimize(result.way);
 		socket.emit('result', result);
 	})
 
 	socket.on ('disconnect', function () {
-		console.log('goodbye');
+		console.log('disconnected');
 	});
 });
 

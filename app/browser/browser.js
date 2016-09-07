@@ -35,6 +35,7 @@ socket.on('result', function(result) {
 		if (i+1 < result.way.length)
 			wayInfo.innerHTML += ' > ';
 	});
+	document.querySelector('.waylength').innerHTML = 'Length: ' + result.waylength;
 
 	s.graph = result.graph;
 

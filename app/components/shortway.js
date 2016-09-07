@@ -108,7 +108,8 @@ ShortWay.findShortWay = function (graph, cpArr) {
 	return data;
 }
 
-ShortWay.optimize = function (way) {
+ShortWay.optimize = function (way, cpArr) {
+	//	tailshorter
 	for (var i = way.length - 1; i >= 0; i--) {
 		way.forEach(function(item, j) {
 			if (item === way[i] && i !== j) {
@@ -117,6 +118,20 @@ ShortWay.optimize = function (way) {
 				return;
 			}
 		})
+	}
+
+	//	excessive loops
+	for (var i = 0; i < way.length - 2; i++) {
+		if (way[i] == way[i+2])
+			for (var j = 0; j < cpArr.length; j++) {
+				if (way[i+1] != cpArr[j])
+					continue;
+				else {
+					delete way[i+1];
+					delete way[i+2];
+					way.splice(i+1, 2);
+				}
+			}
 	}
 }
 
