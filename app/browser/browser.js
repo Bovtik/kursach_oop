@@ -8,6 +8,7 @@ socket.on('init', function(graph) {
 	s = new sigma({
 		graph: graph,
 		container: 'canvas',
+renderer: {container: "canvas", type: "canvas"},
 		settings: {
 	  	defaultNodeColor: '#ec5148',
 	  	defaultEdgeColor: '#ec5148',
